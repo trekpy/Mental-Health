@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo {
+            max-width: 100px;
+            height: auto;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+            flex-grow: 1;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        nav .chat-link {
+            background-color: #2575fc;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        nav .chat-link:hover {
+            background-color: #6a11cb;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header .text {
+            flex: 1;
+            text-align: left;
+            padding-right: 20px;
+            animation: fadeInLeft 2s;
+        }
+
+        header .text h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        header .text p {
+            font-size: 1.2em;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header .video {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header .video video {
+            width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 50px;
+            text-align: center;
+            background-color: #eef;
+            animation: fadeInUp 2s;
+        }
+
+        section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .app-description {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #how-it-works {
+            padding: 50px;
+            text-align: center;
+            background-color: #f9f9f9;
+            animation: fadeInUp 2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
+
+        #how-it-works ol {
+            text-align: left;
+            margin-top: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 30px;
+            list-style: none;
+            padding: 0;
+        }
+
+        #how-it-works ol li {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        #how-it-works ol li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #4CAF50;
+            font-size: 1.5em;
+        }
+
+        #how-it-works h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #how-it-works p {
+            font-size: 1.2em;
+            color: #555;
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+
+        .feature-item {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .feature-item p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .cta-button {
+            padding: 15px 25px;
+            background-color: #2575fc;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #6a11cb;
+        }
+
+        /* Chat Box Styling */
+        #chat-box {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        #chat-box header {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #chat-box .messages {
+            height: 300px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        #chat-box .message {
+            margin: 10px 0;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+
+        #chat-box .input-area {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        #chat-box .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        #chat-box .input-area button {
+            padding: 10px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        #chat-box .input-area button:hover {
+            background-color: #6a11cb;
+        }
+
+        #chat-box .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 1.5em;
+            color: #333;
+            cursor: pointer;
+        }
+
+        #chat-box .close-btn:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <img src="path_to_logo.png" alt="MindCare Logo" class="logo">
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#objective">Objective</a>
+        <a href="#contact">Contact Us</a>
+        <a href="javascript:void(0);" class="chat-link" onclick="toggleChat()">Chat</a>
+    </div>
+</nav>
+
+<header id="home">
+    <div class="text">
+        <h1>Welcome to MindCare</h1>
+        <p>
+            MindCare is your companion in maintaining mental well-being. Our platform offers guided meditations, mood tracking, and access to professional support. We aim to empower you to navigate life’s challenges with confidence and positivity.
+        </p>
+    </div>
+    <div class="video">
+        <video src="homePageVid.mp4" controls autoplay loop muted></video>
+    </div>
+</header>
+
+<section id="about">
+    <div class="app-description">
+        <h1>About Our App</h1>
+        <p>
+            MindCare is designed to help you navigate the challenges of mental health. Our platform provides a range of tools and resources, including guided meditations, mood trackers, and professional support connections. Our goal is to empower individuals to take charge of their mental well-being.
+        </p>
+        <p>
+            Whether you're dealing with stress, anxiety, or simply looking to maintain a positive mindset, MindCare is here for you. Scroll down to discover more about our features and how they can help you.
+        </p>
+    </div>
+</section>
+
+<section id="features">
+    <div class="app-description">
+        <h1>Features</h1>
+        <p>
+            Explore guided meditations, mood tracking, expert advice, and personalized recommendations to enhance your mental well-being. MindCare provides all the tools you need in one place.
+        </p>
+
+        <div class="feature-item">
+            <h3>Guided Meditations</h3>
+            <p>Our app offers a variety of guided meditations for stress relief, relaxation, and mindfulness. Take a break and rejuvenate your mind.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Mood Tracking</h3>
+            <p>Track your moods over time and gain insights into your emotional patterns. Our platform provides personalized suggestions to improve your mental health.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Expert Advice</h3>
+            <p>Access expert advice from certified mental health professionals. Whether you need general guidance or professional help, we have you covered.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Personalized Recommendations</h3>
+            <p>Based on your self-assessments, we provide tailored resources, tips, and activities that suit your mental health needs.</p>
+        </div>
+    </div>
+</section>
+
+<section id="how-it-works">
+    <div class="app-description">
+        <h1>How Our App Works</h1>
+        <p>
+            Our app simplifies your mental health journey with an intuitive, step-by-step process:
+        </p>
+        <ol>
+            <li><strong>Sign Up:</strong> Create an account to access all features securely.</li>
+            <li><strong>Assess:</strong> Take clinically validated self-assessments to identify your mental health needs.</li>
+            <li><strong>Explore:</strong> Receive personalized insights and tailored recommendations based on your assessments.</li>
+            <li><strong>Engage:</strong> Access guided meditations, mood trackers, and educational resources to support your mental well-being.</li>
+            <li><strong>Connect:</strong> If needed, get referrals to trusted mental health professionals for further assistance.</li>
+        </ol>
+    </div>
+</section>
+
+<section id="objective">
+    <div class="app-description">
+        <h1>Our Objective</h1>
+        <p>
+            The primary objective of our mental health diagnosis website is to provide users with an accurate, reliable, and user-friendly platform for identifying mental health concerns through clinically validated diagnostic tools and self-assessments. By offering personalized feedback, tailored recommendations, and access to educational resources, we aim to support users in understanding their mental health and encouraging them to seek professional help when needed.
+        </p>
+        <p>
+            The website will prioritize user privacy with robust data security measures and ensure accessibility through multilingual support and an intuitive interface. Additionally, it will provide clear next steps, including referrals to mental health professionals, while continuously evolving based on user feedback and advancements in the field. Ultimately, our goal is to raise awareness, reduce stigma, and make mental health resources more accessible and actionable for everyone.
+        </p>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="app-description">
+        <h1>Contact Us</h1>
+        <p>
+            Have questions or need support? Reach out to our team anytime. We're here to help you on your mental health journey.
+        </p>
+        <p>Email: support@mindcare.com</p>
+        <p>Phone: +123 456 7890</p>
+    </div>
+</section>
+
+<div id="chat-box">
+    <header>
+        Chat with us
+        <button class="close-btn" onclick="closeChat()">×</button>
+    </header>
+    <div class="messages" id="message-container">
+        <div class="message">Hello! How can we assist you today?</div>
+    </div>
+    <div class="input-area">
+        <input type="text" id="user-input" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    function toggleChat() {
+        const chatBox = document.getElementById('chat-box');
+        chatBox.style.display = chatBox.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function closeChat() {
+        document.getElementById('chat-box').style.display = 'none';
+    }
+
+    function sendMessage() {
+        const inputField = document.getElementById('user-input');
+        const userMessage = inputField.value;
+        
+        if (userMessage.trim() !== "") {
+            const messageContainer = document.getElementById('message-container');
+            const userMessageElement = document.createElement('div');
+            userMessageElement.classList.add('message');
+            userMessageElement.textContent = userMessage;
+            messageContainer.appendChild(userMessageElement);
+            
+            inputField.value = '';
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+            
+            setTimeout(() => {
+                const botMessageElement = document.createElement('div');
+                botMessageElement.classList.add('message');
+                botMessageElement.textContent = 'How can we help you today?';
+                messageContainer.appendChild(botMessageElement);
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }, 1000);
+        }
+    }
+</script>
+
+</body>
+</html>
